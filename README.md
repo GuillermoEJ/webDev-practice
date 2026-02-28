@@ -2,13 +2,7 @@
 
 # User Manager - MERN Stack
 
-A practice project to learn how to build full-stack web applications with the **MERN** stack.
-
-A simple yet functional application where you can create, view, update, and delete users. It's my first serious project demonstrating full-stack capabilities, from database modeling to frontend state management.
-
-## Tech Stack (MERN)
-
-The application is built using the industry-standard MERN stack:
+This application is built using the industry-standard MERN stack:
 
 - **MongoDB:** NoSQL database used to store user documents in flexible, JSON-like formats.
 - **Express.js:** Minimal and flexible Node.js web application framework used to build our RESTful API.
