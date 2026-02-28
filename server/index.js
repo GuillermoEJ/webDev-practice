@@ -2,14 +2,31 @@ const express = require("express");
 const mongoose = require("mongoose");
 const app = express(); 
 const UserModel = require("./models/Users");
-const cors = require("cors")
+const cors = require("cors");
+require("dotenv").config();
 
-mongoose.connect("mongodb+srv://guillermoespjim_db_user:1234@cluster0.x6qucuz.mongodb.net/CursoDB?retryWrites=true&w=majority&appName=Cluster0");
+app.use(cors());
+app.use(express.json());
+app.use(express.urlencoded({extended:true}));
 
-app.listen(3001, ()=>{
-    console.log("Server is ready");
+const mongoURI = process.env.MONGODB_URI;
+const port = process.env.PORT || 3001;
 
-}); //cualquier puerto menos el 3001 porque ese es para el frontend para react
+mongoose.connect(mongoURI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    family: 4
+})
+  .then(() => {
+    console.log("MongoDB connected successfully");
+  })
+  .catch((err) => {
+    console.error("MongoDB connection failed:", err.message);
+  });
+
+app.listen(port, ()=>{
+    console.log(`Server is running on http://localhost:${port}`);
+});
 
 app.get("/getUsers", (req, res) =>{
     UserModel.find().then(function (response){
@@ -19,7 +36,29 @@ app.get("/getUsers", (req, res) =>{
     })
 });
 
-app.delete('users/:id', async(req, res) =>{
+app.get('/getUser/:id', async (req, res) => {
+    try {
+      const userId = req.params.id;
+      const user = await UserModel.findById(userId);
+      if (!user) {
+        return res.status(404).send('User not found');
+      }
+      res.send(user);
+    } catch (err) {
+      res.status(500).send(err);
+    }
+});
+
+app.put("/updateUser/:id", async(req,res)=>{
+    try{
+        const updatedUser = await UserModel.findByIdAndUpdate(req.params.id, req.body, {new: true});
+        res.json(updatedUser);
+    } catch(err){
+        res.status(400).json({message: err.message});
+    }
+});
+
+app.delete('/users/:id', async(req, res) =>{
     try {
         await UserModel.findByIdAndDelete(req.params.id);
         res.json({message:'Item deleted'});
