@@ -35,29 +35,6 @@ npm start
 ```
 Opens on `http://localhost:3000`
 
-## Project Structure
-
-```
-├── client/
-│   └── src/
-│       ├── components/        # UserForm, UserList, UserItem
-│       ├── App.js
-│       └── App.css
-└── server/
-    ├── models/
-    │   └── Users.js           # Mongoose Schema
-    └── index.js               # Routes & Server
-```
-
-## What I Learned
-
-- Connecting frontend and backend with axios
-- Creating schemas with Mongoose and MongoDB
-- Form data validation (client-side)
-- How React hooks work (useState, useEffect)
-- Basic HTTP routes (GET, POST, DELETE)
-- Modern CSS styling with gradients and hover effects
-- Building reusable components in React
 
 ## Features
 
