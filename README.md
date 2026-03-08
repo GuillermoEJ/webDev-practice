@@ -13,7 +13,6 @@ This application is built using the industry-standard MERN stack:
 
 ## Features
 
-**Core Functionalities:**
 - **Full CRUD Operations:** Create, Read, Update, and Delete data seamlessly.
 - **RESTful API:** Structured backend with Express.js managing modular HTTP routes.
 - **State Management:** Fully dynamic UI leveraging React Hooks (`useState`, `useEffect`).
